@@ -1,10 +1,8 @@
 package com.example.dependencyinjection
 
-import com.example.dependdencyinjection.EmailService
-import com.example.dependdencyinjection.UserRegistrationService
 import dagger.Component
 
-@Component
+@Component(modules = [UserRepositoryModule::class,NotificationServiceModule::class])
 interface UserRegistrationComponent {
     /**
      * Traditional way of gettig the Object.
