@@ -1,10 +1,11 @@
 package com.example.dependdencyinjection
 
 import android.util.Log
+import com.example.dependencyinjection.TAG.Companion.tag
+import javax.inject.Inject
 
-class EmailService {
-    val TAG:String=EmailService::class.simpleName.toString()
+class EmailService @Inject constructor() {
     fun send(to:String,from:String,body:String){
-        Log.d(TAG, "Email Sent")
+        Log.d(tag, "Email Sent")
     }
 }

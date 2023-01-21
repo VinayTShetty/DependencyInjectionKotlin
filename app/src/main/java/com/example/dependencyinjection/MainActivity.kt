@@ -5,20 +5,22 @@ import android.os.Bundle
 import com.example.dependdencyinjection.EmailService
 import com.example.dependdencyinjection.UserRegistrationService
 import com.example.dependdencyinjection.UserRepository
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var userRegistrationService: UserRegistrationService
+    @Inject
+    lateinit var emailService: EmailService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val userRepository =UserRepository()
-        val emailService=EmailService()
-
-        /**
-         * Manual Depedency Injection,
-         * Injecting the objects manually. i.e 'userRepository' and 'emailService'
-         */
-        val userRegistrationService=UserRegistrationService(userRepository,emailService)
-        userRegistrationService.registerUser("Vinaytshetty@gmail.com","MandiraVinay")
+        val component=DaggerUserRegistrationComponent.builder().build()
+        component.injectfromMainActivity(this)
+        userRegistrationService.registerUser("vinaytshetty@gmail.com","123456")
+        emailService.send("vinaytshetty@gmail.com","mandiravinay@gmail.com","Happy Mandira")
     }
 }

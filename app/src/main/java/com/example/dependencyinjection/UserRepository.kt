@@ -1,10 +1,11 @@
 package com.example.dependdencyinjection
 
 import android.util.Log
+import com.example.dependencyinjection.TAG.Companion.tag
+import javax.inject.Inject
 
-class UserRepository {
-    val TAG:String=UserRepository::class.simpleName.toString()
+class UserRepository @Inject constructor(){
     fun saveUser(email: String, password: String) {
-        Log.d(TAG, "User Saved in DB")
+        Log.d(tag, "User Saved in DB")
     }
 }
