@@ -16,8 +16,18 @@ class NotificationServiceModule {
 
     /**
      * Adding a named annotation to make
-     */
+     case 1:-
     @Named("messsage")
+    @Provides
+    fun getMessageService(messageService: MessageService): NotificationService {
+    return MessageService()
+    }
+     */
+
+    /**
+     * Using custom annotation class to avoid type mistake.
+     */
+    @MessageQualifier
     @Provides
     fun getMessageService(messageService: MessageService): NotificationService {
         return MessageService()
