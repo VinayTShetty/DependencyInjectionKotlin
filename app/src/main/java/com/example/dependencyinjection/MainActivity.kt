@@ -11,14 +11,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val userRepository =UserRepository()
-        val emailService=EmailService()
 
         /**
          * Manual Depedency Injection,
          * Injecting the objects manually. i.e 'userRepository' and 'emailService'
          */
-        val userRegistrationService=UserRegistrationService(userRepository,emailService)
+      /*
+       val userRepository =UserRepository()
+       val emailService=EmailService()
+       val userRegistrationService=UserRegistrationService(userRepository,emailService)
+        userRegistrationService.registerUser("Vinaytshetty@gmail.com","MandiraVinay")*/
+
+        //Using Dagger Dependency injection.
+        val component=DaggerUserRegistrationComponent.builder().build()
+
+        val userRegistrationService=component.getuserRegistration()
         userRegistrationService.registerUser("Vinaytshetty@gmail.com","MandiraVinay")
+
+        val emailService=component.getEmailService()
+        emailService.send("Vinaytshetty@gmail.com","MandiraVinay@gmail.com","Hi Dad")
     }
 }
