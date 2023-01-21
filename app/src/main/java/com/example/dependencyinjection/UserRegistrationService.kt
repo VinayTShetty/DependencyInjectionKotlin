@@ -1,8 +1,10 @@
 package com.example.dependdencyinjection
 
 import javax.inject.Inject
+import javax.inject.Named
 
-class UserRegistrationService @Inject constructor(private val userRepository: UserRepository, private val notificationService:NotificationService) {
+class UserRegistrationService @Inject constructor(private val userRepository: UserRepository,
+                                                  @Named("messsage") private val notificationService:NotificationService) {
 
     fun registerUser(email:String,password:String){
         userRepository.saveUser(email,password)
@@ -10,3 +12,8 @@ class UserRegistrationService @Inject constructor(private val userRepository: Us
     }
 }
 
+
+/**
+   @Named
+  Using named qualifier to tell Dagger in the interface implementation.Which method to call.
+ */
